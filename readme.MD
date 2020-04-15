@@ -1,28 +1,24 @@
-# Amazon Marketplace Webservices
-[![Latest Stable Version](https://poser.pugx.org/mcs/amazon-mws/v/stable)](https://packagist.org/packages/mcs/amazon-mws) [![Latest Unstable Version](https://poser.pugx.org/mcs/amazon-mws/v/unstable)](https://packagist.org/packages/mcs/amazon-mws) [![License](https://poser.pugx.org/mcs/amazon-mws/license)](https://packagist.org/packages/mcs/amazon-mws) [![Total Downloads](https://poser.pugx.org/mcs/amazon-mws/downloads)](https://packagist.org/packages/mcs/amazon-mws)
-
-
 
 Interaction with the Amazon Api for vendors called MWS
 ### Change your composer.json file
-```bash
+```composer
 "require": {
     // ...
-    "mcs/amazon-mws": "*",
+    "baneetsharma/mws-amazon": "*",
     // ...
 },
 "repositories": [
     {
-        "name": "mcs/amazon-mws",
-        "type": "git",
-        "url": "git@github.com:baneetsharma/amazon-mws.git"
+        "name": "baneetsharma/mws-amazon",
+        "type": "vcs",
+        "url": "git@github.com:baneetsharma/mws-amazon.git"
     }
 ]
 ```
 
 ### Installation:
 ```bash
-$ composer require mcs/amazon-mws
+$ composer require baneetsharma/mws-amazon
 ```
 ### Initiate the client
 ```php
