@@ -1312,7 +1312,7 @@ class MWSClient{
             return false;
         }
 
-        $xml = simplexml_load_string($content);
+        $xml = @simplexml_load_string($content);
         if ($xml === false) {
             return false;
         }
