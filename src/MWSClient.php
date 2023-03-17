@@ -480,10 +480,51 @@ class MWSClient{
 
         if (isset($response['GetOrderResult']['Orders']['Order'])) {
             return $response['GetOrderResult']['Orders']['Order'];
-        } else {
-            return false;
         }
+        
+        return false;
     }
+
+    /**
+     * Returns an Fulfillment Order based on the AmazonOrderId values that you specify.
+     * @param string $AmazonOrderId
+     * @return array if the order is found, false if not
+     */
+    public function getFulfillmentOrder($AmazonOrderId)
+    {
+        $response = $this->request('GetFulfillmentOrder', [
+            'SellerFulfillmentOrderId' => $AmazonOrderId
+        ]);
+        if (isset($response['GetFulfillmentOrderResult'])) {
+            return $response['GetFulfillmentOrderResult'];
+        }
+
+        return false;
+    }
+    
+    /**
+     * get Inbound Guidance For SKU based on the MarketplaceId values that you specify.
+     * @param string $AmazonOrderId
+     * @return array if the order is found, false if not
+     */
+    public function getInboundGuidanceForSKU($MarketplaceId, $skus)
+    {
+        $data = ['MarketplaceId' => $MarketplaceId];
+        if(!empty($skus) ){
+            $i = 1;
+            foreach( $skus as $sku){
+                $data['SellerSKUList.Id.'.$i] =  $sku;
+                $i++;
+            }
+        }
+        $response = $this->request('GetInboundGuidanceForSKU', $data);
+        if (isset($response['GetInboundGuidanceForSKUResult']['SKUInboundGuidanceList']['SKUInboundGuidance'])) {
+            return $response['GetInboundGuidanceForSKUResult']['SKUInboundGuidanceList']['SKUInboundGuidance'];
+        }
+        
+        return false;
+    }
+
 
     /**
      * Returns order items based on the AmazonOrderId that you specify.
@@ -1178,10 +1219,10 @@ class MWSClient{
      * Request MWS
      */
     private function request($endPoint, array $query = [], $body = null, $raw = false)
-    {
-
+    {   
+        
         $endPoint = MWSEndPoint::get($endPoint);
-
+        
         $merge = [
             'Timestamp' => gmdate(self::DATE_FORMAT, time()),
             'AWSAccessKeyId' => $this->config['Access_Key_ID'],
@@ -1256,7 +1297,7 @@ class MWSClient{
             if($this->client === NULL) {
                 $this->client = new Client();
             }
-
+            
             $response = $this->client->request(
                 $endPoint['method'],
                 $this->config['Region_Url'] . $endPoint['path'],

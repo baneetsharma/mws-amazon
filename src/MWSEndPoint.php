@@ -108,6 +108,24 @@ class MWSEndPoint{
             'path' => '/Orders/2013-09-01',
             'date' => '2013-09-01'
         ],
+        'GetFulfillmentOrder' => [
+            'method' => 'POST',
+            'action' => 'GetFulfillmentOrder',
+            'path' => '/FulfillmentOutboundShipment/2010-10-01',
+            'date' => '2010-10-01'
+        ],
+        'GetInboundGuidanceForSKU' => [
+            'method' => 'POST',
+            'action' => 'GetInboundGuidanceForSKU',
+            'path' => '/FulfillmentInboundShipment/2010-10-01',
+            'date' => '2010-10-01'
+        ],
+        'GetMatchingProduct' => [
+            'method' => 'POST',
+            'action' => 'GetMatchingProduct',
+            'path' => '/Products/2011-10-01',
+            'date' => '2011-10-01'
+        ],
         'SubmitFeed' => [
             'method' => 'POST',
             'action' => 'SubmitFeed',
